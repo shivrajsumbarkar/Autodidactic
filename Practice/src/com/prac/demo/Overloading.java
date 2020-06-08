@@ -11,6 +11,10 @@ public class Overloading {
 	{
 		System.out.println("Integer");
 	}
+	public void msg(long l)
+	{
+		System.out.println("long");
+	}
 	public void msg(int i)
 	{
 		System.out.println("int");
