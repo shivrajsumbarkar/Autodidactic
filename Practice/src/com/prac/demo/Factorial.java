@@ -6,6 +6,10 @@ public class Factorial {
 		System.out.println(fact(2));
 
 	}
+	public void DemoReview()
+	{
+	System.out.println("Demo Review");
+	}
 	
 	public static int fact(int num)
 	{
