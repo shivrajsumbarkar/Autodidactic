@@ -15,9 +15,6 @@ public class Overloading {
 	{
 		System.out.println("long");
 	}
-	public void msg(int i)
-	{
-		System.out.println("int");
-	}
+	
 
 }

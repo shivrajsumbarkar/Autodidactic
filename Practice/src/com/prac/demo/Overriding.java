@@ -7,18 +7,24 @@ public class Overriding extends ParentClass {
 		// TODO Auto-generated method stub
 		Overriding p=new Overriding();
 		//p.msg(); Not visible outside the class
-System.out.println(p.name);
+		System.out.println(p.name);
 
 	}
-//Cannot override static and private method
+	//Cannot override static and private method
 	private void msg()
 	{
-		System.out.println("CHildPrivate");
+		System.out.println("Child Private");
 	}
 	public static void staticMethod()
 	{
 		System.out.println("staticMethodChild");
 	}
+	
+	public void msgReview()
+	{
+		System.out.println("Child Msg Review");
+	}
+
 
 }
 
@@ -36,6 +42,10 @@ System.out.println(p.name);
 	public static void staticMethod()
 	{
 		System.out.println("staticMethodParent");
+	}
+	public void msgReview()
+	{
+		System.out.println("Parent Msg Review");
 	}
 
 }
