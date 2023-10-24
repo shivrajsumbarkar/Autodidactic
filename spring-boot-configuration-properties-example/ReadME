@@ -1,0 +1,85 @@
+****************************Example Configuration
+
+	1.Database Connection
+	2.Credentials
+	3.Features flag
+	4.Business logic configuration parameter
+	5.Logging parameter--Logging file path and file format
+
+
+***************************Properties vs Yaml file
+
+	==Yaml removes duplicate key text 
+	== Follow nesting pattern
+	Properties file 
+	Ex: User.name:Shiv
+		User.desc: test
+		my.list.values:one,two,three
+		dbvalues:{connectionurl:localhost:oracledb,dbname:test,username:test}
+		
+	YAML file 
+	Ex: User:
+			name:Shiv
+	desc: test	
+
+
+
+
+****************************Different ways to read properties files
+
+1. @Value
+	1. @Value("${property.name}")
+		public String name;
+	2. @Value("${property.name:default value}")----------We can assign default value
+		public String name;
+	3. @Value("${my.list.values}")--------------To read comma separated values and convert it to list
+		public List<String> listValues;
+	4. @Value("#{${dbvalues}}")		-----------# for to evaluate this as a expression 
+		private Map<String, String> dbvalues;
+	
+		
+2. @PropertySource("Property file path")----------Used in spring framework also
+
+Ex: 
+@Configuration
+@PropertySource("classpath:/com/myco/app.properties")
+public class AppConfig {
+   @Autowired
+   Environment env;
+
+   @Bean
+   public TestBean testBean() {
+       TestBean testBean = new TestBean();
+       testBean.setName(env.getProperty("testbean.name"));
+       return testBean;
+   }
+}
+
+3. @ConfigurationProperties
+	==When to use @ConfigurationProperties
+			1.For group of values like db properties
+			2.When this properties used in multiple places in code
+
+Register the @ConfigurationProperties bean in your @Configuration class using the @EnableConfigurationProperties annotation.
+
+Ex:
+@Configuration
+@EnableConfigurationProperties(MailProperties.class)
+public class SpringBootApp {
+  
+}
+
+Ex::
+
+@Configuration
+@ConfigurationProperties(prefix="myapp.mail")
+public class MailProperties {
+
+  private String to;
+  private String host;
+  private int port;
+  }
+  
+  === @Autowired
+  		private MailProperties mailProperties;
+  

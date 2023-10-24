@@ -1,0 +1,45 @@
+Different ways to read properties files
+
+1. @Value
+	1. @Value("${property.name}")
+	2. @Value("${property.name:default value}")----------We can assign default value
+	3.  @Value("#"${property.name}")--------------# To read expression lang like key value pair
+
+2. @PropertySource("Property file path")
+
+Ex: 
+@Configuration
+@PropertySource("classpath:/com/myco/app.properties")
+public class AppConfig {
+   @Autowired
+   Environment env;
+
+   @Bean
+   public TestBean testBean() {
+       TestBean testBean = new TestBean();
+       testBean.setName(env.getProperty("testbean.name"));
+       return testBean;
+   }
+}
+
+3. @ConfigurationProperties
+
+Register the @ConfigurationProperties bean in your @Configuration class using the @EnableConfigurationProperties annotation.
+
+Ex:
+@Configuration
+@EnableConfigurationProperties(MailProperties.class)
+public class SpringBootApp {
+  
+}
+
+Ex::
+
+@Configuration
+@ConfigurationProperties(prefix="myapp.mail")
+public class MailProperties {
+
+  private String to;
+  private String host;
+  private int port;
+  }

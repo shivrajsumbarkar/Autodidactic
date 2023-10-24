@@ -1,0 +1,15 @@
+Topics we have covered 
+1. Communication and service Discovery
+	==	Communication between microservices using RestTemplate and Use of Service Discovery
+	==  Used annotation @EnableEurekaServer, @EnableDicoveryClient
+	
+2. Fault Tolerance and Resilience
+	==  We have used Hystrix api of spring cloud to tackle with Fault Tolerance / Circuit Breaker
+	==  Used annotation @EnableEurekaClient , @EnableCircuitBreaker , @LoadBalanced
+	
+3. Microservices COnfiguration
+	== Configuration features in Spring Boot
+		i.e Value, Environment, ConfigProps, Actuators, Spring Profiles	
+	== Spring Cloud Config Server
+	== Dynamic COnfiguration
+	== Best Practice and patterns
