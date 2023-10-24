@@ -1,0 +1,24 @@
+What is the meaning of S.O.L.I.D?
+	Solid represents five principles of java which are:
+	
+	 S: Single responsibility principle
+	 == Class/Interface should have one responsibility/details like, Address class should have address details only
+	 O: Open-closed principle
+	 == Code should be Open for Extension and Closed for modification like, Use Interface and Inheritance and for any changes extend or implement class or interface
+	 L: Liskov substitution principle
+	 == Derived types must be completely substitutable for their base types. Like We can pass any derived type to base type as a reference in method
+	 ==the functions that use references to the base classes must be able to use objects of derived class without knowing it.
+	 == Ex Square is a Rectangle
+	 I: Interface segregation principle
+	 == We should have separate Interface for every functionality 
+	 == For Payment we should have PaymentInterface
+	 == For Order we should have OrderPayment 
+	 EX. RestaurantPayment :: Do not create PaymentOrderInterface separate it to PaymentInterface and OrderPayment.
+	 D: Dependency inversion principle
+	 ==it as it depends on abstractions not on concretions.According to it, the high-level module must never rely on any low-level module .
+	 == Credit / Debit card and swipping machine never bother about your card 
+	 ==you can see that both you and the clerk are dependent on the credit card abstraction and you are not worried about the specifics of the card. This is what a dependency inversion principle is.
+	 
+The DRY Principle: Don't Repeat Yourself:::: Create Utility for common code/Functionality
+		DRY stand for "Don't Repeat Yourself," a basic principle of software development aimed at reducing repetition of information. The DRY principle is stated as, 
+		"Every piece of knowledge or logic must have a single, unambiguous representation within a system."

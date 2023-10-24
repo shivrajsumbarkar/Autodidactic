@@ -1,0 +1,49 @@
+  Sql statement order::
+ 
+     SELECT column-names
+      FROM table-name
+     WHERE condition
+     GROUP BY column-names
+    HAVING condition
+     ORDER BY column-names
+     
+     Link:: https://www.dofactory.com/sql/having
+
+
+   *******************************************************************************************************
+   
+Q. Find Nth Salary of Employee
+
+	Select Distinct(e1.salary) from Employee e1
+	where (N-1)=(Select count(distinct (e2.salary)) from Employee e2
+				where e2.salary>e1.salary);
+		************************************************************************************************
+			
+Q. Get employee and manager from same table
+
+	SELECT e.employee_name, m.employee_name AS manager_name
+	FROM   employee e
+	INNER JOIN   employee m on e.manager_id = m.employee_id
+	
+For more queries :: https://javarevisited.blogspot.com/2016/01/4-ways-to-find-nth-highest-salary-in.html	
+******************************************************************************************************************
+
+Q. Procedure vs Function
+
+https://community.oracle.com/thread/3637149?start=0&tstart=0
+
+--------------------Procedure--------          -------------------------------Function----------------------------
+1. Stored Procedures can call functions.						Stored procedures can’t be called from function.
+2. Can have select statements as well as DML statements         will not allow us to use DML statements.
+   such as insert, update, delete and so on	
+3. Can use both table variables as well as   					We can use only table variables, it will not allow using temporary tables. 
+   temporary table in it.	  			
+4. We can go for transaction management in procedure			we can't go in function.
+5. Procedures cannot be utilized in a select statement			function can be embedded in a select statement.
+6. procedure can return multiple values(max. 1024)				Function returns 1 value only   
+
+****************************************************************************************************************
+
+Q. Query to remove duplicate records from table
+			DELETE FROM cte
+			WHERE row_num > 1;

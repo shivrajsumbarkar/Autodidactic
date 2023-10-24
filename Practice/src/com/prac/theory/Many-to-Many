@@ -1,0 +1,170 @@
+Many-to-Many mapping 
+-----------------------
+EX:: Stock----------Stock-Catagory-Tagging-----------Catagory
+For many to many with extra columns in join table,
+	--We have to create one tagging table to map the two table primaryKeys
+------------------------------------
+
+package com.mkyong.stock;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.CascadeType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name = "stock", catalog = "mkyongdb", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "STOCK_NAME"),
+		@UniqueConstraint(columnNames = "STOCK_CODE") })
+public class Stock implements java.io.Serializable {
+
+	private Integer stockId;
+	private String stockCode;
+	private String stockName;
+	private Set<Category> categories = new HashSet<Category>(0);
+
+	public Stock() {
+	}
+
+	public Stock(String stockCode, String stockName) {
+		this.stockCode = stockCode;
+		this.stockName = stockName;
+	}
+
+	public Stock(String stockCode, String stockName, Set<Category> categories) {
+		this.stockCode = stockCode;
+		this.stockName = stockName;
+		this.categories = categories;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "STOCK_ID", unique = true, nullable = false)
+	public Integer getStockId() {
+		return this.stockId;
+	}
+
+	public void setStockId(Integer stockId) {
+		this.stockId = stockId;
+	}
+
+	@Column(name = "STOCK_CODE", unique = true, nullable = false, length = 10)
+	public String getStockCode() {
+		return this.stockCode;
+	}
+
+	public void setStockCode(String stockCode) {
+		this.stockCode = stockCode;
+	}
+
+	@Column(name = "STOCK_NAME", unique = true, nullable = false, length = 20)
+	public String getStockName() {
+		return this.stockName;
+	}
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "stock_category", catalog = "mkyongdb", joinColumns = {
+			@JoinColumn(name = "STOCK_ID", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID",
+					nullable = false, updatable = false) })
+	public Set<Category> getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+}
+
+**********************************************************
+
+package com.mkyong.stock;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "category", catalog = "mkyongdb")
+public class Category implements java.io.Serializable {
+
+	private Integer categoryId;
+	private String name;
+	private String desc;
+	private Set<Stock> stocks = new HashSet<Stock>(0);
+
+	public Category() {
+	}
+
+	public Category(String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+
+	public Category(String name, String desc, Set<Stock> stocks) {
+		this.name = name;
+		this.desc = desc;
+		this.stocks = stocks;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "CATEGORY_ID", unique = true, nullable = false)
+	public Integer getCategoryId() {
+		return this.categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	@Column(name = "NAME", nullable = false, length = 10)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "[DESC]", nullable = false)
+	public String getDesc() {
+		return this.desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+	public Set<Stock> getStocks() {
+		return this.stocks;
+	}
+
+	public void setStocks(Set<Stock> stocks) {
+		this.stocks = stocks;
+	}
+
+}	

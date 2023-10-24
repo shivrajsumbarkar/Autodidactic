@@ -1,0 +1,108 @@
+Q.ClassNotFoundException vs NoClassDefFoundError::
+	> ClassNotFoundException is an exception that occurs when you try to load a class at run time using Class.forName() or loadClass() methods and mentioned classes are not found in the classpath. 
+	> NoClassDefFoundError is an error that occurs when a particular class is present at compile time, but was missing at run time.
+*********************************************************	
+Q. What is N+1 problem in Hibernate?
+	1.N+1 problem comes in one-to-many mapping
+	2. One query for parent and N queries for child	Ex: MobileVendor and PhoneModels
+
+	Link:: https://mkyong.com/hibernate/hibernate-fetching-strategies-examples/
+Fetching Strategies
+There are four fetching strategies
+ Resolve N+1 SELECTs problem
+	1. fetch-“join” = Disable the lazy loading, always load all the collections and entities.
+	2. fetch-“select” (default) = Lazy load all the collections and entities.
+	3. batch-size=”N” = Fetching up to ‘N’ collections or entities, *Not record*.
+	4. fetch-“subselect” = Group its collection into a sub select statement.
+
+MobileVendor Class
+
+	Class MobileVendor{
+	        long vendor_id;
+	        PhoneModel[] phoneModels;
+	        ...
+	 }
+
+Okay, so you want to print out all the details of phone models.
+A naive O/R implementation would SELECT all mobile vendors and 
+then do N additional SELECTs for getting the information of PhoneModel for each vendor	 	
+
+-- Get all Mobile Vendors
+ SELECT * FROM MobileVendor;
+-- For each MobileVendor, get PhoneModel details
+ SELECT * FROM PhoneModel WHERE MobileVendor.vendorId=?
+ 
+ As you see, the N+1 problem can happen if the first query populates the primary object and 
+ the second query populates all the child objects for each of the unique primary objects returned.
+ 
+
+**************************************************************************************************
+Abstraction::
+	1. Showing functionality and hiding complexity.
+	2. Achieve Using Abstact class and Interface 
+Abstact class::
+	1. Abstract class is used to provide common method implementation to all the subclasses or to provide default implementation.
+	2. It can implement interfaces without even providing implementation of interface methods.
+
+	******************************************************************************************
+	
+Idempotent methods:
+An idempotent HTTP method is a HTTP method that can be called many times without different outcomes.
+It would not matter if the method is called only once, or ten times over. 
+The result should be the same. Again, this only applies to the result, not the resource itself.
+
+POST is not idempotent.
+
+******************************************************************************************
+HTTP Status code 
+ 1xx :: Information
+ 		100: Continue
+ 		101: Switching Protocol	
+ 		102: Processing
+ 		
+ 2xx :: Success
+ 		200: OK Success
+ 		201: Created
+ 		202: Accepted
+ 		203: Non Authoritative Information
+ 		204: No content
+ 		
+ 3xx :: Redirection
+ 		304: Not Modified
+ 		
+ 4xx :: Client Error
+ 		400: Bad Request
+ 		401: Unauthorized
+ 		402: Payment Required
+ 		403: Forbidden
+ 		404: Not Found
+ 		408: Request Timeout
+ 		
+ 5xx :: Server Error
+ 		500: Internal Server Error
+ 		502: Bad Gateway
+ 		503: Service Unavailable
+ 		504: Gateway Timeout	
+ 		409: Conflict		
+
+*************************************************************************
+Q: What is a Memory Leak in Java? 
+The standard definition of a memory leak is a scenario that occurs when objects are no longer being used by the application, but the Garbage Collector is unable to remove them from working memory – because they’re still being referenced. 
+As a result, the application consumes more and more resources – which eventually leads to a fatal OutOfMemoryError.
+
+Q:: Preventing Memory Leak
+	1.	Java Heap Leaks: Setting a lower size for the heap . So, that when starting our application, we can adjust the JVM to suit our memory needs:
+		Define Heap size: 
+						Initial -Xms<size>
+						Maximum -Xmx<size>
+	2.	Static Field Holding On to the Object Reference:
+	3.  Calling String.intern() on Long String
+	4.	Please remember that interned String objects are stored in PermGen space – if our application is intended to perform a lot of operations on large strings, we might need to increase the size of the permanent generation:
+
+			PermGen space:  -XX:MaxPermSize=<size>
+		The second solution is to use Java 8 – where the PermGen space is replaced by the Metaspace – which won’t lead to any OutOfMemoryError when using intern on Strings:
+	5.  Unclosed Streams
+	6.	Unclosed Connections
+	7.	Adding Objects with no hashCode() and equals() into a HashSet/HashMap	
+								
+

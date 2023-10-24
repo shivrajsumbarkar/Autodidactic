@@ -1,0 +1,10 @@
+Stereotype Annotations: These annotations is used to create spring bean automatically in the application.
+
+1. @Component : Its a main stereotype annotation.
+				There are some stereotype meta-annotation which are derived from @Component annotation.
+				
+				1. @Service
+				2. @Repository
+				3. @Controller
+	
+	
