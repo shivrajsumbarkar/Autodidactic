@@ -3,12 +3,8 @@ package com.prac.demo;
 public class Factorial {
 
 	public static void main(String[] args) {
-		System.out.println(fact(2));
+		System.out.println(fact(5 ));
 
-	}
-	public void DemoReview()
-	{
-	System.out.println("Demo Review");
 	}
 	
 	public static int fact(int num)

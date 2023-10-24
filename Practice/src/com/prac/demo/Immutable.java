@@ -1,11 +1,16 @@
 package com.prac.demo;
 /**
  * Advantages:: 
- * CLass cannot inherit/extends by subclasss
+ * Class cannot inherit/extends by subclasss
  * It should used in collection/map
- * It is thread safe so we ca used it in multi-threading context 
+ * It is thread safe so we can used it in multi-threading context 
  *  
  * @author sumbarkar
+ * 
+ * Immutable objects are naturally thread-safe
+		Because immutable objects can not be changed, they can be shared among multiple threads freely. 
+		This eliminates the requirements of doing synchronization. In summary, 
+		String is designed to be immutable for efficiency and security reasons.
  *
  */
 public final class Immutable {

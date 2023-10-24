@@ -1,5 +1,7 @@
 package com.prac.demo;
 
+import java.util.Objects;
+
 public class Emp {
 private int id;
 private String name;
@@ -33,6 +35,7 @@ public int hashCode() {
 	result = prime * result + id;
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	return result;
+	//return Objects.hash(id);
 }
 
 @Override

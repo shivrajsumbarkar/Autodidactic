@@ -1,4 +1,4 @@
-package com.prac.demo;
+ package com.prac.demo;
 
 public class SortArray {
 
@@ -6,33 +6,44 @@ public class SortArray {
 	 {
 	  int  arr[]={100,20,15,30,5,75,40};
 	  bubbleSort(arr);
-	  printArray(arr);
+	  printArrayInReverse(arr);
+	  printSortedArray(arr);
 	 
 	 }
 	 
-	 public static int[] bubbleSort(int arr[])
+
+	public static int[] bubbleSort(int arr[])
 	 { int temp=0;
 		for(int i=0;i<arr.length;i++)
 		{
-			for(int j=0;j<arr.length-1-i;j++)
+			for(int j=i+1;j<arr.length;j++)
 			{
-				if(arr[j]>arr[j+1])
+				if(arr[i]>arr[j])
 				{
-					temp=arr[j];
-					arr[j]=arr[j+1];
-					arr[j+1]=temp;
+					temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
 				}
 			}
 		}
 	  return arr;
 	 }
-	 public static void printArray(int arr[])
+	 public static void printArrayInReverse(int[] arr)
 	 {
+		 System.out.println("printArrayInReverse: ");
 		 for(int i=arr.length-1;i>=0;i--)
 		 {
 			 System.out.print(arr[i]+" ");
 		 }
+		 System.out.println();
 	 }
-	 
+	 public static void printSortedArray(int[] arr) {
+		 System.out.println("SortedArray: ");
+		 for(int i=0;i<arr.length-1;i++)
+		 {
+			 System.out.print(arr[i]+" ");
+		 }
+			
+		}
 	
 }

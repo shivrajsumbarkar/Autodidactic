@@ -11,7 +11,7 @@ public class ConstructorChaining {
 	
 
 }
-class A
+class A 
 {
 	public A()
 	{

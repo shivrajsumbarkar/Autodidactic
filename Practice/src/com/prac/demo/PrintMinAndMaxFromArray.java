@@ -1,4 +1,4 @@
-package com.prac.demo;
+ package com.prac.demo;
 
 public class PrintMinAndMaxFromArray {
 
