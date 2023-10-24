@@ -1,24 +1,23 @@
 package com.prac.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
 	public static void main(String[] args) {
-		Test t=new Test();
-		t.msg(null); //Compilation error Because String and Integer both are on same level and Object is a common parent
+		List<Integer> list =new ArrayList<Integer>();
+		list.add(2,new Integer(5));// java.lang.IndexOutOfBoundsException: Index: 2, Size: 0
+									// it checks index against size i.e index> size
+									//		private void rangeCheckForAdd(int index) {
+									//	        if (index > size || index < 0)
+									//	            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+									//	    }
+		
+	int [] ints=new int[10];
+	ints[2]=3;
+	System.out.println(ints.toString());
 
-	}
-	public void msg(Object o)
-	{
-	System.out.println("Object");	
-	}
-	public void msg(Exception s)
-	{
-	System.out.println("Exception");	
-	}
-	
-	public void msg(ArithmeticException i)
-	{
-	System.out.println("ArithmeticException");	 //+919822078000 
 	}
 
 }
